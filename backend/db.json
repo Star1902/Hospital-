@@ -144,6 +144,38 @@
       "tipo": "Convenio",
       "status": "triagem",
       "createdAt": "2026-08-05T14:02:08.417Z"
+    },
+    {
+      "id": 1788176017670,
+      "nome": "Laysa",
+      "cpf": "123457890",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-08-31T11:33:37.670Z"
+    },
+    {
+      "id": 1788176136052,
+      "nome": "",
+      "cpf": "",
+      "tipo": "Convenio",
+      "status": "triagem",
+      "createdAt": "2026-08-31T11:35:36.052Z"
+    },
+    {
+      "id": 1788176148430,
+      "nome": "vvdvd",
+      "cpf": "",
+      "tipo": "Convenio",
+      "status": "triagem",
+      "createdAt": "2026-08-31T11:35:48.430Z"
+    },
+    {
+      "id": 1788176308742,
+      "nome": "Laysa",
+      "cpf": "123456789",
+      "tipo": "Convenio",
+      "status": "triagem",
+      "createdAt": "2026-08-31T11:38:28.742Z"
     }
   ],
   "triagens": [
@@ -461,16 +493,46 @@
       "medicacao": "Omeprazol",
       "obs": "rththr",
       "createdAt": "2026-06-09T14:43:30.683Z"
+    },
+    {
+      "id": 1788879614213,
+      "paciente": "yan",
+      "diagnostico": "",
+      "medicacao": "Dipirona",
+      "obs": "maconha ",
+      "createdAt": "2026-09-08T15:00:14.213Z"
+    },
+    {
+      "id": 1788879614215,
+      "paciente": "yan",
+      "diagnostico": "",
+      "medicacao": "Dipirona",
+      "obs": "maconha ",
+      "createdAt": "2026-09-08T15:00:14.215Z"
     }
   ],
   "tv_chamada": {
-    "id": "1786452864874",
-    "localTipo": "CONSULTÓRIO",
+    "id": "1788176339108",
+    "localTipo": "GUICHÊ",
     "localNumero": "01",
-    "paciente": "test",
-    "hora": "09:54"
+    "paciente": "Laysa",
+    "hora": "08:38"
   },
   "tv_historico": [
+    {
+      "id": "1788176339108",
+      "localTipo": "GUICHÊ",
+      "localNumero": "01",
+      "paciente": "Laysa",
+      "hora": "08:38"
+    },
+    {
+      "id": "1788176169109",
+      "localTipo": "GUICHÊ",
+      "localNumero": "01",
+      "paciente": "vvdvd",
+      "hora": "08:36"
+    },
     {
       "id": "1786452864874",
       "localTipo": "CONSULTÓRIO",
@@ -491,20 +553,6 @@
       "localNumero": "01",
       "paciente": "teste",
       "hora": "08:13"
-    },
-    {
-      "id": "1786100378594",
-      "localTipo": "CONSULTÓRIO",
-      "localNumero": "01",
-      "paciente": "test",
-      "hora": "07:59"
-    },
-    {
-      "id": "1785938628927",
-      "localTipo": "CONSULTÓRIO",
-      "localNumero": "01",
-      "paciente": "yan",
-      "hora": "11:03"
     }
   ]
 }

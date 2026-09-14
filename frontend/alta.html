@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Alta Médica</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 30px;
+      background: #f4f6f9;
+      font-family: Arial, sans-serif;
+      color: #222;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    }
+
+    h1 {
+      text-align: center;
+      color: #1f4e79;
+      margin-bottom: 5px;
+    }
+
+    .subtitulo {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: #1f4e79;
+      border-bottom: 2px solid #1f4e79;
+      padding-bottom: 8px;
+      margin-top: 30px;
+    }
+
+    .linha {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .campo {
+      flex: 1;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+      font-family: Arial, sans-serif;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #1f4e79;
+    }
+
+    .botoes {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 35px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 12px 22px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .btn-pdf {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn-pdf:hover {
+      background: #b02a37;
+    }
+
+    .btn-voltar {
+      background: #6c757d;
+      color: white;
+    }
+
+    .btn-voltar:hover {
+      background: #545b62;
+    }
+
+    .alerta {
+      background: #fff3cd;
+      border: 1px solid #ffeeba;
+      padding: 12px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      color: #856404;
+    }
+
+    .assinatura {
+      margin-top: 45px;
+      text-align: center;
+    }
+
+    .linha-assinatura {
+      width: 350px;
+      max-width: 100%;
+      border-top: 1px solid #222;
+      margin: 50px auto 8px;
+    }
+
+    .info-paciente {
+      background: #eef5fb;
+      border-left: 5px solid #1f4e79;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      .linha {
+        flex-direction: column;
+      }
+    }
+
+    /* CONFIGURAÇÃO PARA IMPRESSÃO / PDF */
+    @media print {
+
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+
+      body {
+        background: white;
+        padding: 0;
+        margin: 0;
+      }
+
+      .container {
+        box-shadow: none;
+        max-width: none;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+      }
+
+      .botoes,
+      .alerta {
+        display: none !important;
+      }
+
+      input,
+      textarea,
+      select {
+        border: none;
+        padding-left: 0;
+        padding-right: 0;
+        background: transparent;
+        appearance: none;
+      }
+
+      textarea {
+        resize: none;
+      }
+
+      h1,
+      h2 {
+        break-after: avoid;
+      }
+
+      .campo,
+      .linha,
+      .info-paciente {
+        break-inside: avoid;
+      }
+
+      .assinatura {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>🏥 ALTA MÉDICA</h1>
+
+  <div class="subtitulo">
+    Documento de alta e orientações ao paciente
+  </div>
+
+  <div class="alerta">
+    Preencha todas as informações necessárias antes de gerar o documento de alta.
+  </div>
+
+
+  <!-- DADOS DO PACIENTE -->
+  <h2>1. Dados do Paciente</h2>
+
+  <div class="info-paciente">
+
+    <div class="linha">
+
+      <div class="campo">
+        <label>Nome do paciente</label>
+        <input type="text" id="paciente" readonly>
+      </div>
+
+      <div class="campo">
+        <label>Data da alta</label>
+        <input type="date" id="dataAlta">
+      </div>
+
+    </div>
+
+    <div class="linha">
+
+      <div class="campo">
+        <label>Data de nascimento</label>
+        <input type="date" id="nascimento">
+      </div>
+
+      <div class="campo">
+        <label>Sexo</label>
+
+        <select id="sexo">
+          <option value="">Selecione</option>
+          <option>Feminino</option>
+          <option>Masculino</option>
+          <option>Outro</option>
+          <option>Não informado</option>
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- INFORMAÇÕES CLÍNICAS -->
+  <h2>2. Informações Clínicas</h2>
+
+  <div class="linha">
+    <div class="campo">
+      <label>Diagnóstico principal</label>
+      <textarea id="diagnostico" placeholder="Informe o diagnóstico..."></textarea>
+    </div>
+  </div>
+
+  <div class="linha">
+    <div class="campo">
+      <label>Motivo do atendimento / internação</label>
+      <textarea id="motivo" placeholder="Descreva o motivo do atendimento..."></textarea>
+    </div>
+  </div>
+
+  <div class="linha">
+    <div class="campo">
+      <label>Resumo da evolução clínica</label>
+      <textarea id="evolucao" placeholder="Descreva a evolução do paciente durante o atendimento..."></textarea>
+    </div>
+  </div>
+
+  <div class="linha">
+    <div class="campo">
+      <label>Procedimentos realizados</label>
+      <textarea id="procedimentos" placeholder="Informe os procedimentos realizados..."></textarea>
+    </div>
+  </div>
+
+
+  <!-- MEDICAÇÕES -->
+  <h2>3. Medicamentos</h2>
+
+  <div class="linha">
+    <div class="campo">
+      <label>Medicamentos prescritos na alta</label>
+      <textarea id="medicamentos" placeholder="Nome do medicamento, dose, via e frequência..."></textarea>
+    </div>
+  </div>
+
+  <div class="linha">
+    <div class="campo">
+      <label>Medicamentos suspensos ou alterados</label>
+      <textarea id="medicamentosAlterados" placeholder="Informe medicamentos suspensos ou alterações realizadas..."></textarea>
+    </div>
+  </div>
+
+
+  <!-- ORIENTAÇÕES -->
+  <h2>4. Orientações ao Paciente</h2>
+
+  <div class="linha">
+    <div class="campo">
+      <label>Orientações gerais</label>
+      <textarea id="orientacoes" placeholder="Cuidados, alimentação, repouso, higiene, atividades etc."></textarea>
+    </div>
+  </div>
+
+  <div class="linha">
+    <div class="campo">
+      <label>Cuidados específicos</label>
+      <textarea id="cuidados" placeholder="Descreva cuidados específicos que o paciente deverá seguir..."></textarea>
+    </div>
+  </div>
+
+
+  <!-- ACOMPANHAMENTO -->
+  <h2>5. Acompanhamento</h2>
+
+  <div class="linha">
+    <div class="campo">
+      <label>Retorno / acompanhamento</label>
+      <textarea id="retorno" placeholder="Informe quando e onde o paciente deverá retornar..."></textarea>
+    </div>
+  </div>
+
+  <div class="linha">
+    <div class="campo">
+      <label>Especialidade / profissional para acompanhamento</label>
+      <input
+        type="text"
+        id="especialidade"
+        placeholder="Ex.: Clínica Médica, Cardiologia..."
+      >
+    </div>
+  </div>
+
+
+  <!-- SINAIS DE ALERTA -->
+  <h2>6. Sinais de Alerta</h2>
+
+  <div class="linha">
+    <div class="campo">
+      <label>Sinais e sintomas que exigem retorno imediato</label>
+      <textarea
+        id="sinaisAlerta"
+        placeholder="Informe os sinais de alerta e quando procurar atendimento imediatamente..."
+      ></textarea>
+    </div>
+  </div>
+
+
+  <!-- CONDIÇÃO DA ALTA -->
+  <h2>7. Condição na Alta</h2>
+
+  <div class="linha">
+    <div class="campo">
+
+      <label>Condição do paciente no momento da alta</label>
+
+      <select id="condicao">
+        <option value="">Selecione</option>
+        <option>Estável</option>
+        <option>Melhorado</option>
+        <option>Sem alterações clínicas relevantes</option>
+        <option>Necessita acompanhamento</option>
+        <option>Outra condição</option>
+      </select>
+
+    </div>
+  </div>
+
+  <div class="linha">
+
+    <div class="campo">
+
+      <label>Observações finais</label>
+
+      <textarea
+        id="observacoesFinais"
+        placeholder="Outras informações importantes sobre a alta..."
+      ></textarea>
+
+    </div>
+
+  </div>
+
+
+  <!-- MÉDICO -->
+  <h2>8. Profissional Responsável</h2>
+
+  <div class="linha">
+
+    <div class="campo">
+
+      <label>Nome do médico</label>
+
+      <input
+        type="text"
+        id="medico"
+        placeholder="Nome completo"
+      >
+
+    </div>
+
+    <div class="campo">
+
+      <label>CRM</label>
+
+      <input
+        type="text"
+        id="crm"
+        placeholder="CRM"
+      >
+
+    </div>
+
+  </div>
+
+  <div class="linha">
+
+    <div class="campo">
+
+      <label>Data e hora</label>
+
+      <input
+        type="datetime-local"
+        id="dataHora"
+      >
+
+    </div>
+
+  </div>
+
+
+  <!-- ASSINATURA -->
+  <div class="assinatura">
+
+    <div class="linha-assinatura"></div>
+
+    <strong>Médico responsável</strong>
+
+    <br>
+
+    CRM:
+    <span id="crmAssinatura"></span>
+
+  </div>
+
+
+  <!-- BOTÕES -->
+  <div class="botoes">
+
+    <button
+      type="button"
+      class="btn-pdf"
+      onclick="gerarPDF()"
+    >
+      📄 Baixar Alta em PDF
+    </button>
+
+    <button
+      type="button"
+      class="btn-voltar"
+      onclick="window.location.href='medico.html'"
+    >
+      ← Fechar
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  // =====================================================
+  // RECEBE O NOME DO PACIENTE PELA URL
+  // =====================================================
+
+  const parametros = new URLSearchParams(
+    window.location.search
+  );
+
+  const nomePaciente = parametros.get("paciente");
+
+  if (nomePaciente) {
+
+    document.getElementById("paciente").value =
+      nomePaciente;
+
+  }
+
+
+  // =====================================================
+  // DATA ATUAL
+  // =====================================================
+
+  const agora = new Date();
+
+  const ano = agora.getFullYear();
+
+  const mes = String(
+    agora.getMonth() + 1
+  ).padStart(2, "0");
+
+  const dia = String(
+    agora.getDate()
+  ).padStart(2, "0");
+
+  document.getElementById("dataAlta").value =
+    ano + "-" + mes + "-" + dia;
+
+
+  const horas = String(
+    agora.getHours()
+  ).padStart(2, "0");
+
+  const minutos = String(
+    agora.getMinutes()
+  ).padStart(2, "0");
+
+  document.getElementById("dataHora").value =
+    ano +
+    "-" +
+    mes +
+    "-" +
+    dia +
+    "T" +
+    horas +
+    ":" +
+    minutos;
+
+
+  // =====================================================
+  // ATUALIZA CRM NA ASSINATURA
+  // =====================================================
+
+  document
+    .getElementById("crm")
+    .addEventListener("input", function() {
+
+      document
+        .getElementById("crmAssinatura")
+        .textContent = this.value;
+
+    });
+
+
+  // =====================================================
+  // FUNÇÃO PARA PEGAR VALORES DOS CAMPOS
+  // =====================================================
+
+  function pegarValor(id) {
+
+    const elemento =
+      document.getElementById(id);
+
+    if (!elemento) {
+      return "";
+    }
+
+    return elemento.value || "";
+
+  }
+
+
+  // =====================================================
+  // GERAÇÃO DO PDF
+  // =====================================================
+
+  function gerarPDF() {
+
+    const paciente =
+      pegarValor("paciente");
+
+    const diagnostico =
+      pegarValor("diagnostico");
+
+    const medico =
+      pegarValor("medico");
+
+    const crm =
+      pegarValor("crm");
+
+
+    // Verifica paciente
+
+    if (!paciente) {
+
+      alert(
+        "Paciente não informado."
+      );
+
+      return;
+
+    }
+
+
+    // Verifica diagnóstico
+
+    if (!diagnostico) {
+
+      alert(
+        "Informe o diagnóstico antes de gerar a alta."
+      );
+
+      return;
+
+    }
+
+
+    // Verifica médico
+
+    if (!medico) {
+
+      alert(
+        "Informe o nome do médico responsável."
+      );
+
+      return;
+
+    }
+
+
+    // Atualiza CRM na assinatura
+
+    document
+      .getElementById("crmAssinatura")
+      .textContent = crm;
+
+
+    // Nome que aparecerá como sugestão
+    // para o arquivo PDF
+
+    const tituloAnterior =
+      document.title;
+
+    document.title =
+      "Alta Médica - " + paciente;
+
+
+    // Abre a tela de impressão
+    // do navegador
+
+    window.print();
+
+
+    // Restaura o título depois
+
+    setTimeout(function() {
+
+      document.title =
+        tituloAnterior;
+
+    }, 1000);
+
+  }
+
+</script>
+
+</body>
+</html>
