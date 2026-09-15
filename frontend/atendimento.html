@@ -1,187 +1,195 @@
 <!DOCTYPE html>
-<html>
-
-<style>
-  * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px 15px;
-  font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(135deg, #e8f1ff, #f7faff);
-  color: #1f2937;
-}
-
-.container {
-  width: 100%;
-  max-width: 650px;
-  padding: 35px;
-  background: #ffffff;
-  border-radius: 18px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
-}
-
-h2 {
-  margin-bottom: 28px;
-  text-align: center;
-  color: #1d4ed8;
-  font-size: 30px;
-  font-weight: 700;
-}
-
-h3 {
-  margin: 28px 0 15px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e5e7eb;
-  color: #374151;
-  font-size: 18px;
-}
-
-input,
-select {
-  width: 100%;
-  height: 48px;
-  margin-bottom: 14px;
-  padding: 0 15px;
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
-  background: #f9fafb;
-  color: #374151;
-  font-size: 15px;
-  outline: none;
-  transition: 0.2s ease;
-}
-
-input::placeholder {
-  color: #9ca3af;
-}
-
-input:focus,
-select:focus {
-  border-color: #2563eb;
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
-}
-
-select {
-  cursor: pointer;
-}
-
-button {
-  width: 100%;
-  height: 50px;
-  margin-top: 12px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.2s ease;
-  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
-}
-
-button:hover {
-  background: linear-gradient(135deg, #1d4ed8, #1e40af);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.30);
-}
-
-button:active {
-  transform: translateY(0);
-}
-
-@media (max-width: 600px) {
-  body {
-    padding: 15px;
-  }
-
-  .container {
-    padding: 25px 20px;
-    border-radius: 14px;
-  }
-
-  h2 {
-    font-size: 25px;
-  }
-}
-
-</style>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recepção - Atendimento</title>
+  <link rel="stylesheet" href="/css/atendimento.css">
+  <style>
+    .form-group { margin-bottom: 12px; }
+    .form-row { display: flex; gap: 10px; }
+    .form-row input, .form-row select { flex: 1; }
+    .menor-container {
+      display: none;
+      background-color: #fff3cd;
+      border: 1px solid #ffeeba;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    #mensagem-status {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
+      display: none;
+      font-weight: bold;
+      text-align: center;
+    }
+    .sucesso { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .erro { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+  </style>
+</head>
 <body>
 <div class="container">
-<h2>Atendimento</h2>
+  <h2>Recepção - Novo Atendimento</h2>
 
-<input id="nome" placeholder="Nome">
-<input id="cpf" placeholder="CPF">
+  <!-- Nome Completo -->
+  <div class="form-group">
+    <input id="nome" placeholder="Nome Completo *">
+  </div>
 
-<input id="dataNascimento" type="date" placeholder="Data de nascimento">
+  <!-- CPF e Data de Nascimento -->
+  <div class="form-group form-row">
+    <input id="cpf" placeholder="CPF (000.000.000-00)">
+    <input type="date" id="dataNascimento" onchange="calcularIdade()" title="Data de Nascimento">
+  </div>
 
-<select id="sexo">
-  <option value="">Sexo</option>
-  <option>Masculino</option>
-  <option>Feminino</option>
-  <option>Outro</option>
-</select>
+  <!-- Sexo e Estado Civil -->
+  <div class="form-group form-row">
+    <select id="sexo">
+      <option value="">Selecione o Sexo</option>
+      <option value="Masculino">Masculino</option>
+      <option value="Feminino">Feminino</option>
+      <option value="Outro">Outro</option>
+      <option value="NaoInformado">Prefiro não informar</option>
+    </select>
 
-<input id="nomeMae" placeholder="Nome da mãe">
-<input id="nomePai" placeholder="Nome do pai">
+    <select id="estadoCivil">
+      <option value="">Selecione o Estado Civil</option>
+      <option value="Solteiro(a)">Solteiro(a)</option>
+      <option value="Casado(a)">Casado(a)</option>
+      <option value="Divorciado(a)">Divorciado(a)</option>
+      <option value="Viuvo(a)">Viúvo(a)</option>
+      <option value="UniaoEstavel">União Estável</option>
+    </select>
+  </div>
 
-<select id="estadoCivil">
-  <option value="">Estado civil</option>
-  <option>Solteiro(a)</option>
-  <option>Casado(a)</option>
-  <option>Divorciado(a)</option>
-  <option>Viúvo(a)</option>
-  <option>União estável</option>
-</select>
+  <!-- Alerta e Campo para Menores de Idade -->
+  <div class="menor-container" id="campoResponsavel">
+    <label style="font-size: 12px; color: #856404; display: block; margin-bottom: 4px;">Paciente menor de idade:</label>
+    <input id="responsavel" placeholder="Nome do Responsável *">
+  </div>
 
-<input id="endereco" placeholder="Endereço">
-<input id="telefone" placeholder="Telefone">
-<input id="email" type="email" placeholder="E-mail">
+  <!-- Tipo de Atendimento -->
+  <div class="form-group">
+    <select id="tipo">
+      <option value="Convenio">Convênio</option>
+      <option value="Particular">Particular</option>
+      <option value="SUS">SUS</option>
+    </select>
+  </div>
 
-<h3>Contato de emergência</h3>
+  <!-- Foto do Paciente -->
+  <div class="form-group">
+    <input type="file" id="foto">
+  </div>
 
-<input id="contatoEmergencia" placeholder="Nome do contato de emergência">
-<input id="telefoneEmergencia" placeholder="Telefone de emergência">
+  <button id="btnCadastrar" onclick="cadastrar()">Enviar para Triagem</button>
 
-<select id="tipo">
-  <option>Convenio</option>
-  <option>Particular</option>
-</select>
-
-<button onclick="cadastrar()">Cadastrar</button>
+  <!-- Mensagem de Retorno na Tela -->
+  <div id="mensagem-status"></div>
 </div>
 
 <script>
-function cadastrar(){
- fetch("http://localhost:3000/atendimento",{
-  method:"POST",
-  headers:{"Content-Type":"application/json"},
-  body: JSON.stringify({
-    nome: nome.value,
-    cpf: cpf.value,
-    dataNascimento: dataNascimento.value,
-    sexo: sexo.value,
-    nomeMae: nomeMae.value,
-    nomePai: nomePai.value,
-    estadoCivil: estadoCivil.value,
-    endereco: endereco.value,
-    telefone: telefone.value,
-    email: email.value,
-    contatoEmergencia: contatoEmergencia.value,
-    telefoneEmergencia: telefoneEmergencia.value,
-    tipo: tipo.value
-  })
- });
- alert("Paciente enviado para triagem");
+let idadeCalculada = null;
+
+// Calcula a idade dinamicamente
+function calcularIdade() {
+  const dataNascInput = document.getElementById("dataNascimento").value;
+  const divResponsavel = document.getElementById("campoResponsavel");
+
+  if (!dataNascInput) {
+    divResponsavel.style.display = "none";
+    idadeCalculada = null;
+    return;
+  }
+
+  const dataNascimento = new Date(dataNascInput);
+  const hoje = new Date();
+  let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+  const mes = hoje.getMonth() - dataNascimento.getMonth();
+
+  if (mes < 0 || (mes === 0 && hoje.getDate() < dataNascimento.getDate())) {
+    idade--;
+  }
+
+  idadeCalculada = idade;
+
+  // Exibe o campo do responsável para menores de 18 anos
+  if (idade < 18) {
+    divResponsavel.style.display = "block";
+  } else {
+    divResponsavel.style.display = "none";
+    document.getElementById("responsavel").value = "";
+  }
+}
+
+function exibirMensagem(texto, tipo) {
+  const divStatus = document.getElementById("mensagem-status");
+  divStatus.textContent = texto;
+  divStatus.className = tipo;
+  divStatus.style.display = "block";
+}
+
+async function cadastrar() {
+  const nomeVal = document.getElementById("nome").value.trim();
+  const dataNascVal = document.getElementById("dataNascimento").value;
+  const responsavelVal = document.getElementById("responsavel").value.trim();
+  const btn = document.getElementById("btnCadastrar");
+
+  if (!nomeVal || !dataNascVal) {
+    exibirMensagem("Por favor, preencha o Nome e a Data de Nascimento.", "erro");
+    return;
+  }
+
+  if (idadeCalculada !== null && idadeCalculada < 18 && !responsavelVal) {
+    exibirMensagem("Pacientes menores de idade precisam do nome do responsável.", "erro");
+    return;
+  }
+
+  btn.disabled = true;
+  exibirMensagem("Enviando dados...", "sucesso");
+
+  const dadosPaciente = {
+    nome: nomeVal,
+    cpf: document.getElementById("cpf").value.trim(),
+    dataNascimento: dataNascVal,
+    idade: idadeCalculada,
+    sexo: document.getElementById("sexo").value,
+    estadoCivil: document.getElementById("estadoCivil").value,
+    responsavel: responsavelVal,
+    tipo: document.getElementById("tipo").value
+  };
+
+  try {
+    // Rota relativa para funcionar tanto localmente quanto no Render
+    const resposta = await fetch("/atendimento", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dadosPaciente)
+    });
+
+    if (resposta.ok) {
+      exibirMensagem("Paciente cadastrado com sucesso e enviado para a Triagem!", "sucesso");
+
+      // Limpa os campos
+      document.getElementById("nome").value = "";
+      document.getElementById("cpf").value = "";
+      document.getElementById("dataNascimento").value = "";
+      document.getElementById("sexo").value = "";
+      document.getElementById("estadoCivil").value = "";
+      document.getElementById("responsavel").value = "";
+      document.getElementById("campoResponsavel").style.display = "none";
+      document.getElementById("foto").value = "";
+    } else {
+      exibirMensagem("Erro no servidor ao tentar cadastrar o paciente.", "erro");
+    }
+  } catch (erro) {
+    console.error("Erro na requisição:", erro);
+    exibirMensagem("Não foi possível conectar ao servidor.", "erro");
+  } finally {
+    btn.disabled = false;
+  }
 }
 </script>
 </body>

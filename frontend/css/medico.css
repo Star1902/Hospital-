@@ -1,0 +1,182 @@
+/* ==========================================================================
+   MEDICO.CSS - Prontuário Clínico e Fila de Triados por Manchester
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f4f8;
+    min-height: 100vh;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 30px;
+    width: 100%;
+    max-width: 1250px;
+}
+
+/* Coluna Esquerda: Lista de Triagens prontas */
+.sidebar {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    height: fit-content;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.sidebar h3 {
+    color: #1a365d;
+    margin-bottom: 16px;
+    font-size: 18px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+}
+
+/* Cards com borda de risco baseada no Protocolo de Manchester */
+.card-triagem {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-left: 6px solid #cbd5e1;
+}
+
+.card-triagem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+}
+
+/* Classes dinâmicas para as bordas do Manchester */
+.border-vermelho { border-left-color: #e53e3e !important; background-color: #fffafb; }
+.border-amarelo { border-left-color: #dd6b20 !important; background-color: #fffdfa; }
+.border-verde { border-left-color: #38a169 !important; background-color: #fafdfb; }
+
+.card-triagem h4 {
+    color: #2d3748;
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.card-triagem p {
+    font-size: 13px;
+    color: #4a5568;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.badge-risco {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+.badge-vermelho { background-color: #fed7d7; color: #9b2c2c; }
+.badge-amarelo { background-color: #feebc8; color: #c05621; }
+.badge-verde { background-color: #c6f6d5; color: #22543d; }
+
+/* Coluna Direita: Formulário de Consulta */
+.main-content {
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    height: fit-content;
+}
+
+h2 {
+    color: #1a365d;
+    margin-bottom: 24px;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    color: #4a5568;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #3182ce;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+}
+
+/* Campo protegido apenas para leitura */
+input[readonly] {
+    background-color: #e2e8f0;
+    color: #4a5568;
+    font-weight: bold;
+    cursor: not-allowed;
+}
+
+textarea {
+    height: 110px;
+    resize: none;
+}
+
+/* Caixa informativa contendo o resumo da Triagem */
+.dados-triagem-box {
+    background-color: #f7fafc;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px dashed #cbd5e1;
+    margin-bottom: 20px;
+    display: none; /* Só aparece quando o médico seleciona alguém */
+}
+
+.dados-triagem-box p {
+    font-size: 14px;
+    color: #4a5568;
+    margin-bottom: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #2b6cb0;
+}
