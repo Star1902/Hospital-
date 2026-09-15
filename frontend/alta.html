@@ -3,236 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alta Médica</title>
   <style>
     /* ==========================================================================
-   ESTILO DA PÁGINA DE ALTA MÉDICA (Formulário + Impressão em PDF)
-   ========================================================================== */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+       ESTILO HOSPITALAR DESIGNED FOR DESKTOP
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-body {
-  background-color: #f0f4f8;
-  color: #2d3748;
-  min-height: 100vh;
-  padding: 30px 20px;
-  display: flex;
-  justify-content: center;
-}
+    body {
+      background-color: #f0f4f8;
+      color: #2d3748;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
 
-.container {
-  background: #ffffff;
-  width: 100%;
-  max-width: 850px;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-}
+    .container {
+      background: #ffffff;
+      width: 100%;
+      max-width: 960px;
+      padding: 45px 50px;
+      border-radius: 12px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06);
+      border-top: 6px solid #3182ce;
+    }
 
-/* Títulos e Subtítulos */
-h1 {
-  color: #1a365d;
-  font-size: 26px;
-  text-align: center;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
+    /* Cabeçalho */
+    h1 {
+      color: #1a365d;
+      font-size: 28px;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
 
-.subtitulo {
-  text-align: center;
-  color: #718096;
-  font-size: 14px;
-  margin-top: 4px;
-  margin-bottom: 20px;
-}
+    .subtitulo {
+      text-align: center;
+      color: #718096;
+      font-size: 14px;
+      margin-top: 4px;
+      margin-bottom: 25px;
+    }
 
-.alerta {
-  background-color: #ebf8ff;
-  border-left: 4px solid #3182ce;
-  color: #2b6cb0;
-  padding: 12px 16px;
-  border-radius: 0 6px 6px 0;
-  font-size: 13.5px;
-  font-weight: 600;
-  margin-bottom: 30px;
-}
+    .alerta {
+      background-color: #ebf8ff;
+      border-left: 4px solid #3182ce;
+      color: #2b6cb0;
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 35px;
+    }
 
-h2 {
-  color: #1a365d;
-  font-size: 16px;
-  border-bottom: 2px solid #e2e8f0;
-  padding-bottom: 6px;
-  margin-top: 30px;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+    /* Divisões de Seção */
+    h2 {
+      color: #1a365d;
+      font-size: 15px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      margin-top: 35px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
 
-/* Estrutura de Linhas e Campos */
-.linha {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 15px;
-}
+    /* Layout do Formulário */
+    .linha {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
 
-.campo {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
+    .campo {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #4a5568;
-  margin-bottom: 6px;
-}
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 6px;
+    }
 
-input[type="text"],
-input[type="date"],
-input[type="datetime-local"],
-select,
-textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 14px;
-  background-color: #f8fafc;
-  color: #2d3748;
-  transition: all 0.2s ease;
-}
+    input[type="text"],
+    input[type="date"],
+    input[type="datetime-local"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 14px;
+      background-color: #f8fafc;
+      color: #2d3748;
+      transition: all 0.2s ease;
+    }
 
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  border-color: #3182ce;
-  background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
-}
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #3182ce;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+    }
 
-input[readonly] {
-  background-color: #edf2f7;
-  color: #1a365d;
-  font-weight: bold;
-  cursor: not-allowed;
-}
+    input[readonly] {
+      background-color: #edf2f7;
+      color: #1a365d;
+      font-weight: 700;
+      cursor: not-allowed;
+    }
 
-textarea {
-  resize: vertical;
-  min-height: 80px;
-}
+    textarea {
+      resize: vertical;
+      min-height: 85px;
+      line-height: 1.5;
+    }
 
-/* Seção de Assinatura */
-.assinatura {
-  margin-top: 50px;
-  text-align: center;
-  width: 280px;
-  margin-left: auto;
-  margin-right: auto;
-}
+    /* Assinatura */
+    .assinatura {
+      margin-top: 60px;
+      text-align: center;
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-.linha-assinatura {
-  border-top: 1.5px solid #a0aec0;
-  margin-bottom: 8px;
-}
+    .linha-assinatura {
+      border-top: 2px solid #cbd5e1;
+      margin-bottom: 10px;
+    }
 
-.assinatura strong {
-  color: #1a365d;
-  font-size: 14px;
-}
+    .assinatura strong {
+      color: #1a365d;
+      font-size: 14px;
+    }
 
-/* Botões */
-.botoes {
-  display: flex;
-  gap: 15px;
-  margin-top: 40px;
-}
+    /* Botões */
+    .botoes {
+      display: flex;
+      gap: 20px;
+      margin-top: 45px;
+    }
 
-button {
-  flex: 1;
-  padding: 13px;
-  border: none;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
+    button {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
 
-.btn-pdf {
-  background-color: #dd6b20;
-  color: white;
-}
+    .btn-pdf {
+      background-color: #dd6b20;
+      color: white;
+    }
 
-.btn-pdf:hover {
-  background-color: #c05621;
-}
+    .btn-pdf:hover {
+      background-color: #c05621;
+    }
 
-.btn-voltar {
-  background-color: #edf2f7;
-  color: #4a5568;
-}
+    .btn-voltar {
+      background-color: #edf2f7;
+      color: #4a5568;
+    }
 
-.btn-voltar:hover {
-  background-color: #e2e8f0;
-}
+    .btn-voltar:hover {
+      background-color: #e2e8f0;
+    }
 
-/* ==========================================================================
-   CONFIGURAÇÃO DE IMPRESSÃO (PDF / IMPRESSORA NATIVA)
-   ========================================================================== */
-@media print {
-  body {
-    background-color: #ffffff;
-    padding: 0;
-  }
+    /* Regras de Impressão PDF */
+    @media print {
+      body {
+        background-color: #ffffff;
+        padding: 0;
+      }
 
-  .container {
-    box-shadow: none;
-    padding: 0;
-    max-width: 100%;
-  }
+      .container {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+        border-top: none;
+      }
 
-  .alerta,
-  .botoes {
-    display: none !important;
-  }
+      .alerta,
+      .botoes {
+        display: none !important;
+      }
 
-  h2 {
-    border-bottom: 1.5px solid #3182ce;
-    color: #3182ce;
-    margin-top: 20px;
-  }
+      h2 {
+        border-bottom: 1.5px solid #3182ce;
+        color: #3182ce;
+        margin-top: 25px;
+      }
 
-  input,
-  select,
-  textarea {
-    border: none;
-    background-color: transparent !important;
-    padding: 0;
-    font-size: 13px;
-    box-shadow: none !important;
-  }
+      input,
+      select,
+      textarea {
+        border: none;
+        background-color: transparent !important;
+        padding: 0;
+        font-size: 13px;
+        box-shadow: none !important;
+      }
 
-  textarea {
-    min-height: auto;
-  }
+      textarea {
+        min-height: auto;
+      }
 
-  .assinatura {
-    margin-top: 70px;
-    page-break-inside: avoid;
-  }
-}
+      .assinatura {
+        margin-top: 80px;
+        page-break-inside: avoid;
+      }
+    }
   </style>
-
-  <title>Alta Médica</title>
-
 </head>
-
 <body>
 
 <div class="container">
@@ -247,14 +246,11 @@ button {
     Preencha todas as informações necessárias antes de gerar o documento de alta.
   </div>
 
-
   <!-- DADOS DO PACIENTE -->
   <h2>1. Dados do Paciente</h2>
 
   <div class="info-paciente">
-
     <div class="linha">
-
       <div class="campo">
         <label>Nome do paciente</label>
         <input type="text" id="paciente" readonly>
@@ -264,11 +260,9 @@ button {
         <label>Data da alta</label>
         <input type="date" id="dataAlta">
       </div>
-
     </div>
 
     <div class="linha">
-
       <div class="campo">
         <label>Data de nascimento</label>
         <input type="date" id="nascimento">
@@ -276,7 +270,6 @@ button {
 
       <div class="campo">
         <label>Sexo</label>
-
         <select id="sexo">
           <option value="">Selecione</option>
           <option>Feminino</option>
@@ -284,13 +277,9 @@ button {
           <option>Outro</option>
           <option>Não informado</option>
         </select>
-
       </div>
-
     </div>
-
   </div>
-
 
   <!-- INFORMAÇÕES CLÍNICAS -->
   <h2>2. Informações Clínicas</h2>
@@ -323,7 +312,6 @@ button {
     </div>
   </div>
 
-
   <!-- MEDICAÇÕES -->
   <h2>3. Medicamentos</h2>
 
@@ -340,7 +328,6 @@ button {
       <textarea id="medicamentosAlterados" placeholder="Informe medicamentos suspensos ou alterações realizadas..."></textarea>
     </div>
   </div>
-
 
   <!-- ORIENTAÇÕES -->
   <h2>4. Orientações ao Paciente</h2>
@@ -359,7 +346,6 @@ button {
     </div>
   </div>
 
-
   <!-- ACOMPANHAMENTO -->
   <h2>5. Acompanhamento</h2>
 
@@ -373,14 +359,9 @@ button {
   <div class="linha">
     <div class="campo">
       <label>Especialidade / profissional para acompanhamento</label>
-      <input
-        type="text"
-        id="especialidade"
-        placeholder="Ex.: Clínica Médica, Cardiologia..."
-      >
+      <input type="text" id="especialidade" placeholder="Ex.: Clínica Médica, Cardiologia...">
     </div>
   </div>
-
 
   <!-- SINAIS DE ALERTA -->
   <h2>6. Sinais de Alerta</h2>
@@ -388,22 +369,16 @@ button {
   <div class="linha">
     <div class="campo">
       <label>Sinais e sintomas que exigem retorno imediato</label>
-      <textarea
-        id="sinaisAlerta"
-        placeholder="Informe os sinais de alerta e quando procurar atendimento imediatamente..."
-      ></textarea>
+      <textarea id="sinaisAlerta" placeholder="Informe os sinais de alerta e quando procurar atendimento imediatamente..."></textarea>
     </div>
   </div>
-
 
   <!-- CONDIÇÃO DA ALTA -->
   <h2>7. Condição na Alta</h2>
 
   <div class="linha">
     <div class="campo">
-
       <label>Condição do paciente no momento da alta</label>
-
       <select id="condicao">
         <option value="">Selecione</option>
         <option>Estável</option>
@@ -412,297 +387,114 @@ button {
         <option>Necessita acompanhamento</option>
         <option>Outra condição</option>
       </select>
-
     </div>
   </div>
 
   <div class="linha">
-
     <div class="campo">
-
       <label>Observações finais</label>
-
-      <textarea
-        id="observacoesFinais"
-        placeholder="Outras informações importantes sobre a alta..."
-      ></textarea>
-
+      <textarea id="observacoesFinais" placeholder="Outras informações importantes sobre a alta..."></textarea>
     </div>
-
   </div>
-
 
   <!-- MÉDICO -->
   <h2>8. Profissional Responsável</h2>
 
   <div class="linha">
-
     <div class="campo">
-
       <label>Nome do médico</label>
-
-      <input
-        type="text"
-        id="medico"
-        placeholder="Nome completo"
-      >
-
+      <input type="text" id="medico" placeholder="Nome completo">
     </div>
 
     <div class="campo">
-
       <label>CRM</label>
-
-      <input
-        type="text"
-        id="crm"
-        placeholder="CRM"
-      >
-
+      <input type="text" id="crm" placeholder="CRM">
     </div>
-
   </div>
 
   <div class="linha">
-
     <div class="campo">
-
       <label>Data e hora</label>
-
-      <input
-        type="datetime-local"
-        id="dataHora"
-      >
-
+      <input type="datetime-local" id="dataHora">
     </div>
-
   </div>
-
 
   <!-- ASSINATURA -->
   <div class="assinatura">
-
     <div class="linha-assinatura"></div>
-
-    <strong>Médico responsável</strong>
-
-    <br>
-
-    CRM:
-    <span id="crmAssinatura"></span>
-
+    <strong>Médico responsável</strong><br>
+    CRM: <span id="crmAssinatura"></span>
   </div>
-
 
   <!-- BOTÕES -->
   <div class="botoes">
-
-    <button
-      type="button"
-      class="btn-pdf"
-      onclick="gerarPDF()"
-    >
-      📄 Baixar Alta em PDF
-    </button>
-
-    <button
-      type="button"
-      class="btn-voltar"
-      onclick="window.location.href='medico.html'"
-    >
-      ← Fechar
-    </button>
-
+    <button type="button" class="btn-pdf" onclick="gerarPDF()">📄 Baixar Alta em PDF</button>
+    <button type="button" class="btn-voltar" onclick="window.location.href='medico.html'">← Fechar</button>
   </div>
 
 </div>
 
-
 <script>
-
-  // =====================================================
-  // RECEBE O NOME DO PACIENTE PELA URL
-  // =====================================================
-
-  const parametros = new URLSearchParams(
-    window.location.search
-  );
-
+  const parametros = new URLSearchParams(window.location.search);
   const nomePaciente = parametros.get("paciente");
 
   if (nomePaciente) {
-
-    document.getElementById("paciente").value =
-      nomePaciente;
-
+    document.getElementById("paciente").value = nomePaciente;
   }
-
-
-  // =====================================================
-  // DATA ATUAL
-  // =====================================================
 
   const agora = new Date();
-
   const ano = agora.getFullYear();
+  const mes = String(agora.getMonth() + 1).padStart(2, "0");
+  const dia = String(agora.getDate()).padStart(2, "0");
 
-  const mes = String(
-    agora.getMonth() + 1
-  ).padStart(2, "0");
+  document.getElementById("dataAlta").value = ano + "-" + mes + "-" + dia;
 
-  const dia = String(
-    agora.getDate()
-  ).padStart(2, "0");
+  const horas = String(agora.getHours()).padStart(2, "0");
+  const minutos = String(agora.getMinutes()).padStart(2, "0");
 
-  document.getElementById("dataAlta").value =
-    ano + "-" + mes + "-" + dia;
+  document.getElementById("dataHora").value = ano + "-" + mes + "-" + dia + "T" + horas + ":" + minutos;
 
-
-  const horas = String(
-    agora.getHours()
-  ).padStart(2, "0");
-
-  const minutos = String(
-    agora.getMinutes()
-  ).padStart(2, "0");
-
-  document.getElementById("dataHora").value =
-    ano +
-    "-" +
-    mes +
-    "-" +
-    dia +
-    "T" +
-    horas +
-    ":" +
-    minutos;
-
-
-  // =====================================================
-  // ATUALIZA CRM NA ASSINATURA
-  // =====================================================
-
-  document
-    .getElementById("crm")
-    .addEventListener("input", function() {
-
-      document
-        .getElementById("crmAssinatura")
-        .textContent = this.value;
-
-    });
-
-
-  // =====================================================
-  // FUNÇÃO PARA PEGAR VALORES DOS CAMPOS
-  // =====================================================
+  document.getElementById("crm").addEventListener("input", function() {
+    document.getElementById("crmAssinatura").textContent = this.value;
+  });
 
   function pegarValor(id) {
-
-    const elemento =
-      document.getElementById(id);
-
-    if (!elemento) {
-      return "";
-    }
-
-    return elemento.value || "";
-
+    const elemento = document.getElementById(id);
+    return elemento ? elemento.value || "" : "";
   }
 
-
-  // =====================================================
-  // GERAÇÃO DO PDF
-  // =====================================================
-
   function gerarPDF() {
-
-    const paciente =
-      pegarValor("paciente");
-
-    const diagnostico =
-      pegarValor("diagnostico");
-
-    const medico =
-      pegarValor("medico");
-
-    const crm =
-      pegarValor("crm");
-
-
-    // Verifica paciente
+    const paciente = pegarValor("paciente");
+    const diagnostico = pegarValor("diagnostico");
+    const medico = pegarValor("medico");
+    const crm = pegarValor("crm");
 
     if (!paciente) {
-
-      alert(
-        "Paciente não informado."
-      );
-
+      alert("Paciente não informado.");
       return;
-
     }
-
-
-    // Verifica diagnóstico
 
     if (!diagnostico) {
-
-      alert(
-        "Informe o diagnóstico antes de gerar a alta."
-      );
-
+      alert("Informe o diagnóstico antes de gerar a alta.");
       return;
-
     }
-
-
-    // Verifica médico
 
     if (!medico) {
-
-      alert(
-        "Informe o nome do médico responsável."
-      );
-
+      alert("Informe o nome do médico responsável.");
       return;
-
     }
 
+    document.getElementById("crmAssinatura").textContent = crm;
 
-    // Atualiza CRM na assinatura
-
-    document
-      .getElementById("crmAssinatura")
-      .textContent = crm;
-
-
-    // Nome que aparecerá como sugestão
-    // para o arquivo PDF
-
-    const tituloAnterior =
-      document.title;
-
-    document.title =
-      "Alta Médica - " + paciente;
-
-
-    // Abre a tela de impressão
-    // do navegador
+    const tituloAnterior = document.title;
+    document.title = "Alta Médica - " + paciente;
 
     window.print();
 
-
-    // Restaura o título depois
-
     setTimeout(function() {
-
-      document.title =
-        tituloAnterior;
-
+      document.title = tituloAnterior;
     }, 1000);
-
   }
-
 </script>
 
 </body>
