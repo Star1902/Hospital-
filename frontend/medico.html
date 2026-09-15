@@ -232,38 +232,95 @@ function gerarPDFAlta() {
 function gerarPDFNativoNavegador(dados) {
   const win = window.open("", "_blank");
   win.document.write(`
-    <html>
+    <!DOCTYPE html>
+    <html lang="pt-br">
     <head>
-      <title>Termo de Alta Médica</title>
+      <meta charset="UTF-8">
+      <title>Termo de Alta Médica - ${dados.paciente}</title>
       <style>
-        body { font-family: Arial, sans-serif; padding: 30px; color: #2d3748; }
-        .header { border-bottom: 2px solid #2b6cb0; padding-bottom: 10px; margin-bottom: 20px; }
-        .title { text-align: center; font-size: 18px; font-weight: bold; color: #2b6cb0; margin-bottom: 20px; }
-        .box { border: 1px solid #cbd5e1; padding: 10px; margin-bottom: 15px; border-radius: 4px; }
-        .signature { margin-top: 60px; text-align: center; border-top: 1px solid #4a5568; width: 250px; margin-left: auto; margin-right: auto; padding-top: 5px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { padding: 40px; background-color: #ffffff; color: #2d3748; line-height: 1.5; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #3182ce; padding-bottom: 15px; margin-bottom: 25px; }
+        .header h1 { color: #1a365d; font-size: 22px; font-weight: bold; text-transform: uppercase; }
+        .header p { color: #718096; font-size: 13px; font-weight: 600; }
+        
+        .document-title { text-align: center; font-size: 18px; font-weight: 700; color: #1a365d; letter-spacing: 1px; margin-bottom: 25px; text-transform: uppercase; background: #f0f4f8; padding: 10px; border-radius: 6px; }
+        
+        .section-title { font-size: 14px; font-weight: 700; color: #3182ce; text-transform: uppercase; margin-bottom: 10px; border-left: 4px solid #3182ce; padding-left: 8px; }
+        
+        .box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 20px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        
+        .info-group { margin-bottom: 8px; }
+        .info-group strong { color: #4a5568; font-size: 13px; display: inline-block; }
+        .info-group span { color: #1a365d; font-size: 14px; font-weight: 600; }
+        
+        .alerta-box { background-color: #fffaf0; border-left: 4px solid #dd6b20; color: #c05621; padding: 10px; font-size: 13px; font-weight: bold; border-radius: 0 6px 6px 0; margin-top: 5px; }
+        
+        .signature-container { margin-top: 80px; display: flex; justify-content: flex-end; }
+        .signature-box { text-align: center; width: 280px; }
+        .signature-line { border-top: 2px solid #cbd5e1; margin-bottom: 8px; }
+        .signature-title { font-size: 14px; font-weight: bold; color: #1a365d; }
+        .signature-sub { font-size: 12px; color: #718096; }
+
+        @media print {
+          body { padding: 20px; }
+          .box { border: 1px solid #cbd5e1; }
+        }
       </style>
     </head>
     <body>
       <div class="header">
-        <h2>HOSPITAL SENTINELA</h2>
-        <p>Data: ${new Date().toLocaleDateString('pt-BR')}</p>
+        <div>
+          <h1>Hospital Sentinela</h1>
+          <p>Sistema de Gestão Hospitalar e Prontuário</p>
+        </div>
+        <div>
+          <p><strong>Emissão:</strong> ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}</p>
+        </div>
       </div>
-      <div class="title">TERMO DE ALTA MÉDICA</div>
+
+      <div class="document-title">Termo de Alta Médica</div>
+
+      <div class="section-title">Dados do Paciente</div>
+      <div class="box grid-2">
+        <div class="info-group"><strong>Nome:</strong> <span>${dados.paciente}</span></div>
+        <div class="info-group"><strong>Sintoma Apresentado:</strong> <span>${dados.sintoma || 'Não informado'}</span></div>
+        <div class="info-group"><strong>Temperatura Aferida:</strong> <span>${dados.temperatura ? dados.temperatura + ' °C' : '—'}</span></div>
+        <div class="info-group"><strong>Alergias Registradas:</strong> <span>${dados.alergia || 'Nenhuma'}</span></div>
+      </div>
+
+      <div class="section-title">Avaliação Clínica & Prescrição</div>
       <div class="box">
-        <p><strong>Paciente:</strong> ${dados.paciente}</p>
-        <p><strong>Sintoma:</strong> ${dados.sintoma || '—'}</p>
-        <p><strong>Temperatura:</strong> ${dados.temperatura ? dados.temperatura + ' °C' : '—'}</p>
-        <p><strong>Alergias:</strong> ${dados.alergia || 'Nenhuma'}</p>
+        <div class="info-group" style="margin-bottom: 12px;">
+          <strong>Diagnóstico / Hipótese:</strong>
+          <br><span>${dados.diagnostico || '—'}</span>
+        </div>
+        <div class="info-group">
+          <strong>Medicação Prescrita:</strong>
+          <br><span>${dados.medicacao || 'Nenhuma medicação prescrita.'}</span>
+        </div>
       </div>
+
+      <div class="section-title">Orientações de Alta</div>
       <div class="box">
-        <p><strong>Diagnóstico:</strong> ${dados.diagnostico || '—'}</p>
-        <p><strong>Medicação:</strong> ${dados.medicacao || 'Nenhuma'}</p>
+        <p style="font-size: 14px; color: #2d3748;">${dados.obs ? dados.obs.replace(/\n/g, '<br>') : 'Paciente recebe alta médica sem intercorrências. Recomenda-se repouso e retorno em caso de novos sintomas.'}</p>
       </div>
-      <div class="box">
-        <p><strong>Observações:</strong> ${dados.obs || 'Paciente liberado.'}</p>
+
+      <div class="signature-container">
+        <div class="signature-box">
+          <div class="signature-line"></div>
+          <div class="signature-title">Dr. Médico Responsável</div>
+          <div class="signature-sub">CRM / Registro Profissional</div>
+        </div>
       </div>
-      <div class="signature">Dr. Médico Responsável</div>
-      <script>window.onload = function() { window.print(); };<\/script>
+
+      <script>
+        window.onload = function() { 
+          window.print(); 
+        };
+      <\/script>
     </body>
     </html>
   `);
