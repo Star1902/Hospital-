@@ -1,6 +1,31 @@
 /* ==========================================================================
-   MEDICO.CSS - Prontuário Clínico e Fila de Triados por Manchester
+   MEDICO.CSS - Sistema Hospitalar / Prontuário Clínico
+   Tema: Azul + Branco + Vermelho
    ========================================================================== */
+
+:root {
+    --azul-escuro: #0b2d4d;
+    --azul: #0d6efd;
+    --azul-claro: #eaf4ff;
+    --azul-hover: #0957b5;
+
+    --vermelho: #d71920;
+    --vermelho-escuro: #a80f15;
+    --vermelho-claro: #fff0f1;
+
+    --branco: #ffffff;
+    --cinza-fundo: #eef3f8;
+    --cinza-borda: #d8e1ea;
+    --cinza-texto: #526273;
+    --cinza-escuro: #263746;
+
+    --sombra: 0 8px 25px rgba(11, 45, 77, 0.10);
+}
+
+/* ==========================================================================
+   RESET
+   ========================================================================== */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -9,102 +34,362 @@
 }
 
 body {
-    background-color: #f0f4f8;
+    background:
+        linear-gradient(
+            135deg,
+            #eef5fb 0%,
+            #f8fbff 50%,
+            #edf3f8 100%
+        );
+
     min-height: 100vh;
     padding: 30px;
+
     display: flex;
     justify-content: center;
+
+    color: var(--cinza-escuro);
 }
+
+/* ==========================================================================
+   PAINEL PRINCIPAL
+   ========================================================================== */
 
 .dashboard {
     display: grid;
     grid-template-columns: 380px 1fr;
-    gap: 30px;
+    gap: 25px;
+
     width: 100%;
-    max-width: 1250px;
+    max-width: 1350px;
+
+    position: relative;
 }
 
-/* Coluna Esquerda: Lista de Triagens prontas */
+/* Barra superior decorativa */
+
+.dashboard::before {
+    content: "";
+    position: absolute;
+
+    top: -10px;
+    left: 0;
+    right: 0;
+
+    height: 5px;
+
+    background: linear-gradient(
+        90deg,
+        var(--azul-escuro) 0%,
+        var(--azul) 65%,
+        var(--vermelho) 65%,
+        var(--vermelho) 100%
+    );
+
+    border-radius: 10px;
+}
+
+/* ==========================================================================
+   COLUNA ESQUERDA - FILA DE TRIAGEM
+   ========================================================================== */
+
 .sidebar {
-    background: #ffffff;
+    background: var(--branco);
+
     padding: 24px;
+
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+
+    border: 1px solid var(--cinza-borda);
+
+    box-shadow: var(--sombra);
+
     height: fit-content;
     max-height: 85vh;
+
     overflow-y: auto;
+
+    position: relative;
+}
+
+/* Cabeçalho da fila */
+
+.sidebar::before {
+    content: "CENTRAL DE TRIAGEM";
+
+    display: block;
+
+    background: var(--azul-escuro);
+
+    color: white;
+
+    padding: 10px 14px;
+
+    margin: -24px -24px 20px -24px;
+
+    border-radius: 12px 12px 0 0;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
 }
 
 .sidebar h3 {
-    color: #1a365d;
-    margin-bottom: 16px;
-    font-size: 18px;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 10px;
+    color: var(--azul-escuro);
+
+    margin-bottom: 18px;
+
+    font-size: 19px;
+
+    border-bottom: 2px solid #e5edf5;
+
+    padding-bottom: 12px;
+
+    position: relative;
 }
 
-/* Cards com borda de risco baseada no Protocolo de Manchester */
+/* Pequeno indicador vermelho */
+
+.sidebar h3::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: -2px;
+    left: 0;
+
+    width: 55px;
+    height: 2px;
+
+    background: var(--vermelho);
+}
+
+/* ==========================================================================
+   CARDS DE TRIAGEM
+   ========================================================================== */
+
 .card-triagem {
     background: #ffffff;
-    border: 1px solid #e2e8f0;
+
+    border: 1px solid var(--cinza-borda);
+
     border-radius: 8px;
+
     padding: 16px;
+
     margin-bottom: 14px;
+
     cursor: pointer;
-    transition: all 0.2s ease;
-    border-left: 6px solid #cbd5e1;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+
+    border-left: 6px solid #b8c5d1;
+
+    position: relative;
 }
 
 .card-triagem:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+
+    box-shadow: 0 7px 18px rgba(11, 45, 77, 0.12);
+
+    border-color: #b7c9da;
 }
 
-/* Classes dinâmicas para as bordas do Manchester */
-.border-vermelho { border-left-color: #e53e3e !important; background-color: #fffafb; }
-.border-amarelo { border-left-color: #dd6b20 !important; background-color: #fffdfa; }
-.border-verde { border-left-color: #38a169 !important; background-color: #fafdfb; }
+/* Linha azul superior quando selecionado */
+
+.card-triagem:hover::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 2px;
+
+    background: var(--azul);
+
+    border-radius: 8px 8px 0 0;
+}
 
 .card-triagem h4 {
-    color: #2d3748;
+    color: var(--azul-escuro);
+
     font-size: 16px;
-    margin-bottom: 6px;
+
+    margin-bottom: 7px;
 }
 
 .card-triagem p {
     font-size: 13px;
-    color: #4a5568;
-    margin-bottom: 4px;
-    line-height: 1.4;
+
+    color: var(--cinza-texto);
+
+    margin-bottom: 5px;
+
+    line-height: 1.5;
 }
+
+/* ==========================================================================
+   CORES DO PROTOCOLO DE TRIAGEM
+   ========================================================================== */
+
+.border-vermelho {
+    border-left-color: var(--vermelho) !important;
+
+    background-color: #fffafa;
+}
+
+.border-amarelo {
+    border-left-color: #e0a000 !important;
+
+    background-color: #fffdf5;
+}
+
+.border-verde {
+    border-left-color: #239b56 !important;
+
+    background-color: #f8fdf9;
+}
+
+/* ==========================================================================
+   BADGES
+   ========================================================================== */
 
 .badge-risco {
     display: inline-block;
-    padding: 3px 8px;
-    font-size: 11px;
-    font-weight: bold;
-    border-radius: 4px;
-    text-transform: uppercase;
-    margin-top: 5px;
-}
-.badge-vermelho { background-color: #fed7d7; color: #9b2c2c; }
-.badge-amarelo { background-color: #feebc8; color: #c05621; }
-.badge-verde { background-color: #c6f6d5; color: #22543d; }
 
-/* Coluna Direita: Formulário de Consulta */
-.main-content {
-    background: #ffffff;
-    padding: 35px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-    height: fit-content;
+    padding: 4px 9px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    border-radius: 4px;
+
+    text-transform: uppercase;
+
+    margin-top: 6px;
+
+    letter-spacing: 0.4px;
 }
+
+.badge-vermelho {
+    background-color: #fde1e3;
+    color: #a80f15;
+
+    border: 1px solid #f4b9bd;
+}
+
+.badge-amarelo {
+    background-color: #fff1c9;
+    color: #8a6200;
+
+    border: 1px solid #efd77e;
+}
+
+.badge-verde {
+    background-color: #dff6e8;
+    color: #176b3b;
+
+    border: 1px solid #b5e5c8;
+}
+
+/* ==========================================================================
+   COLUNA DIREITA - PRONTUÁRIO
+   ========================================================================== */
+
+.main-content {
+    background: var(--branco);
+
+    padding: 35px;
+
+    border-radius: 12px;
+
+    border: 1px solid var(--cinza-borda);
+
+    box-shadow: var(--sombra);
+
+    height: fit-content;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+/* Faixa superior do prontuário */
+
+.main-content::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 5px;
+
+    background: linear-gradient(
+        90deg,
+        var(--azul-escuro),
+        var(--azul)
+    );
+}
+
+/* Indicador hospitalar vermelho */
+
+.main-content::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 90px;
+    height: 5px;
+
+    background: var(--vermelho);
+}
+
+/* ==========================================================================
+   TÍTULOS
+   ========================================================================== */
 
 h2 {
-    color: #1a365d;
-    margin-bottom: 24px;
-    font-size: 24px;
+    color: var(--azul-escuro);
+
+    margin-bottom: 25px;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    border-bottom: 1px solid #e2eaf2;
+
+    padding-bottom: 14px;
 }
+
+h2::before {
+    content: "✚";
+
+    color: var(--vermelho);
+
+    margin-right: 10px;
+
+    font-weight: 900;
+}
+
+/* ==========================================================================
+   FORMULÁRIOS
+   ========================================================================== */
 
 .form-group {
     margin-bottom: 20px;
@@ -112,71 +397,256 @@ h2 {
 
 label {
     display: block;
-    margin-bottom: 6px;
-    color: #4a5568;
-    font-weight: 600;
+
+    margin-bottom: 7px;
+
+    color: var(--azul-escuro);
+
+    font-weight: 650;
+
     font-size: 14px;
 }
 
-input, textarea {
+input,
+textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
+
+    padding: 13px 14px;
+
+    border: 1px solid #c9d5e0;
+
+    border-radius: 7px;
+
     font-size: 15px;
-    background-color: #f8fafc;
-    transition: all 0.3s ease;
+
+    background-color: #f9fbfd;
+
+    color: var(--cinza-escuro);
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
 }
 
-input:focus, textarea:focus {
-    outline: none;
-    border-color: #3182ce;
+input:hover,
+textarea:hover {
+    border-color: #9eb3c7;
+
     background-color: #ffffff;
-    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
 }
 
-/* Campo protegido apenas para leitura */
-input[readonly] {
-    background-color: #e2e8f0;
-    color: #4a5568;
-    font-weight: bold;
-    cursor: not-allowed;
+input:focus,
+textarea:focus {
+    outline: none;
+
+    border-color: var(--azul);
+
+    background-color: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(13, 110, 253, 0.12);
 }
+
+/* ==========================================================================
+   CAMPO SOMENTE LEITURA
+   ========================================================================== */
+
+input[readonly] {
+    background-color: #eaf0f5;
+
+    color: #526273;
+
+    font-weight: 700;
+
+    cursor: not-allowed;
+
+    border-color: #ccd7e1;
+}
+
+/* ==========================================================================
+   TEXTAREA
+   ========================================================================== */
 
 textarea {
     height: 110px;
-    resize: none;
+
+    resize: vertical;
+
+    min-height: 110px;
 }
 
-/* Caixa informativa contendo o resumo da Triagem */
+/* ==========================================================================
+   RESUMO DA TRIAGEM
+   ========================================================================== */
+
 .dados-triagem-box {
-    background-color: #f7fafc;
-    padding: 15px;
-    border-radius: 6px;
-    border: 1px dashed #cbd5e1;
-    margin-bottom: 20px;
-    display: none; /* Só aparece quando o médico seleciona alguém */
+    background:
+        linear-gradient(
+            135deg,
+            #f2f8ff,
+            #ffffff
+        );
+
+    padding: 17px;
+
+    border-radius: 8px;
+
+    border: 1px solid #cbddeb;
+
+    border-left: 5px solid var(--azul);
+
+    margin-bottom: 22px;
+
+    display: none;
+
+    box-shadow: 0 3px 10px rgba(11, 45, 77, 0.05);
 }
 
 .dados-triagem-box p {
     font-size: 14px;
-    color: #4a5568;
-    margin-bottom: 5px;
+
+    color: var(--cinza-texto);
+
+    margin-bottom: 6px;
 }
+
+.dados-triagem-box strong {
+    color: var(--azul-escuro);
+}
+
+/* ==========================================================================
+   BOTÃO PRINCIPAL
+   ========================================================================== */
 
 button {
     width: 100%;
+
     padding: 15px;
-    background-color: #3182ce;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--azul),
+            var(--azul-hover)
+        );
+
     color: white;
+
     border: none;
-    border-radius: 6px;
+
+    border-radius: 7px;
+
     font-size: 16px;
-    font-weight: bold;
+
+    font-weight: 700;
+
     cursor: pointer;
-    transition: background-color 0.2s ease;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+
+    box-shadow:
+        0 5px 12px rgba(13, 110, 253, 0.20);
 }
 
 button:hover {
-    background-color: #2b6cb0;
+    background:
+        linear-gradient(
+            135deg,
+            #0b5ed7,
+            #084a9b
+        );
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 16px rgba(13, 110, 253, 0.28);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   BARRA DE ROLAGEM - ESTILO SISTEMA
+   ========================================================================== */
+
+.sidebar::-webkit-scrollbar {
+    width: 7px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #edf2f7;
+
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #9fb4c8;
+
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--azul);
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+   ========================================================================== */
+
+@media (max-width: 900px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+    .sidebar {
+        max-height: 450px;
+    }
+
+    .main-content {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .sidebar {
+        padding: 18px;
+    }
+
+    .sidebar::before {
+        margin: -18px -18px 18px -18px;
+    }
+
+    h2 {
+        font-size: 21px;
+    }
+
+    input,
+    textarea {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 15px;
+    }
 }
